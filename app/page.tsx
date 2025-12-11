@@ -146,11 +146,12 @@ export default function Home() {
       {/* What Makes Us Unique Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            ref={uniqueSection.ref}
-            className={`grid md:grid-cols-[1.5fr_1fr] gap-12 transition-all duration-700 ${
-              uniqueSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.7 }}
+            className="grid md:grid-cols-[1.5fr_1fr] gap-12"
           >
             {/* Left Section - Text and Small Images */}
             <div className="flex flex-col">
@@ -222,18 +223,19 @@ export default function Home() {
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Our Vision Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            ref={visionSection.ref}
-            className={`grid md:grid-cols-[2fr_1fr] gap-12 items-center transition-all duration-700 ${
-              visionSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.7 }}
+            className="grid md:grid-cols-[2fr_1fr] gap-12 items-center"
           >
             {/* Left - Vision Text */}
             <div>
@@ -254,7 +256,7 @@ export default function Home() {
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -265,11 +267,12 @@ export default function Home() {
             What our users say
           </h2>
 
-          <div
-            ref={testimonialsSection.ref}
-            className={`grid md:grid-cols-[1fr_2fr] gap-12 items-start transition-all duration-700 ${
-              testimonialsSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.7 }}
+            className="grid md:grid-cols-[1fr_2fr] gap-12 items-start"
           >
             {/* Left - Square Image */}
             <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
@@ -330,17 +333,18 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Call to Action Section */}
       <section className="py-20 bg-white">
-        <div
-          ref={ctaSection.ref}
-          className={`max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-all duration-700 ${
-            ctaSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.05 }}
+          transition={{ duration: 0.7 }}
+          className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brown mb-6">
             Rooted in Kaffa. Crafted for the World.
@@ -384,7 +388,7 @@ export default function Home() {
               </div>
             </Button>
           </div>
-        </div>
+        </motion.div>
       </section>
     </main>
   );

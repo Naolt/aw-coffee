@@ -3,10 +3,9 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import WorldMap from "@/components/ui/world-map";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { motion } from "motion/react";
 
 export default function AboutPage() {
-  const missionSection = useScrollAnimation(0.05); // Trigger very early when only 5% visible
 
   return (
     <main className="min-h-screen pt-20">
@@ -121,11 +120,12 @@ export default function AboutPage() {
       {/* Mission Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            ref={missionSection.ref}
-            className={`grid md:grid-cols-[2fr_1fr] gap-12 items-center transition-all duration-700 ${
-              missionSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.7 }}
+            className="grid md:grid-cols-[2fr_1fr] gap-12 items-center"
           >
             {/* Left - Mission Text */}
             <div>
@@ -144,7 +144,7 @@ export default function AboutPage() {
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
