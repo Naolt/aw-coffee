@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { motion } from "motion/react";
 
 const testimonials = [
   {
@@ -10,7 +11,7 @@ const testimonials = [
     quote: "Working with AW Coffee was a pleasure. Their team was professional and our Delivery was on time.",
     author: "Michael Setiawan",
     role: "Founder Baku Hantam",
-    image: "/home/hero.jpg"
+    image: "/home/green.jpg"
   },
   {
     id: 2,
@@ -111,7 +112,7 @@ export default function Home() {
                   of Kaffa to the world
                 </p>
               </div>
-              <Button className="mt-12 hover:bg-green/40 text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 self-start transition-all duration-300 group" style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}>
+              <Button className="mt-12 hover:bg-green/40 hover:scale-[1.02] active:scale-[0.98] text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 self-start transition-all duration-300 group" style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}>
                 GET TO KNOW US MORE
                 <div className="w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:rotate-45" style={{ backgroundColor: '#331E0B' }}>
                   <svg
@@ -130,12 +131,12 @@ export default function Home() {
             </div>
 
             {/* Right - Image */}
-            <div className="relative w-full overflow-hidden" style={{ borderRadius: '30px' }}>
+            <div className="relative w-full overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
               <Image
-                src="/home/hero.jpg"
+                src="/home/home2.jpg"
                 alt="AW Coffee About"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
           </div>
@@ -145,7 +146,12 @@ export default function Home() {
       {/* What Makes Us Unique Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-[1.5fr_1fr] gap-12">
+          <div
+            ref={uniqueSection.ref}
+            className={`grid md:grid-cols-[1.5fr_1fr] gap-12 transition-all duration-700 ${
+              uniqueSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             {/* Left Section - Text and Small Images */}
             <div className="flex flex-col">
               <h2 className="text-4xl md:text-5xl font-bold text-brown mb-12">
@@ -188,32 +194,32 @@ export default function Home() {
 
               {/* Bottom - Two Small Square Images */}
               <div className="grid grid-cols-2 gap-6">
-                <div className="relative w-full aspect-square overflow-hidden" style={{ borderRadius: '30px' }}>
+                <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
                   <Image
-                    src="/home/hero.jpg"
+                    src="/home/unique1.jpg"
                     alt="AW Coffee Feature 1"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
-                <div className="relative w-full aspect-square overflow-hidden" style={{ borderRadius: '30px' }}>
+                <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
                   <Image
-                    src="/home/hero.jpg"
+                    src="/home/unique2.jpg"
                     alt="AW Coffee Feature 2"
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
               </div>
             </div>
 
             {/* Right - Full Height Image */}
-            <div className="relative w-full overflow-hidden" style={{ borderRadius: '30px' }}>
+            <div className="relative w-full overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
               <Image
-                src="/home/hero.jpg"
+                src="/home/unique3.jpg"
                 alt="AW Coffee Unique"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
           </div>
@@ -223,7 +229,12 @@ export default function Home() {
       {/* Our Vision Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-[2fr_1fr] gap-12 items-center">
+          <div
+            ref={visionSection.ref}
+            className={`grid md:grid-cols-[2fr_1fr] gap-12 items-center transition-all duration-700 ${
+              visionSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             {/* Left - Vision Text */}
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-brown mb-6">Our Vision</h2>
@@ -235,12 +246,12 @@ export default function Home() {
             </div>
 
             {/* Right - Small Square Image */}
-            <div className="relative w-full aspect-square overflow-hidden" style={{ borderRadius: '30px' }}>
+            <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
               <Image
-                src="/home/hero.jpg"
+                src="/home/map.jpg"
                 alt="AW Coffee Vision"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
           </div>
@@ -254,14 +265,19 @@ export default function Home() {
             What our users say
           </h2>
 
-          <div className="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
+          <div
+            ref={testimonialsSection.ref}
+            className={`grid md:grid-cols-[1fr_2fr] gap-12 items-start transition-all duration-700 ${
+              testimonialsSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             {/* Left - Square Image */}
-            <div className="relative w-full aspect-square overflow-hidden" style={{ borderRadius: '30px' }}>
+            <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
               <Image
                 src={testimonials[currentTestimonial].image}
                 alt={testimonials[currentTestimonial].author}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
 
@@ -271,7 +287,7 @@ export default function Home() {
               <div className="flex gap-4 justify-end mb-8">
                 <button
                   onClick={prevTestimonial}
-                  className="w-12 h-12 rounded-full bg-green flex items-center justify-center hover:bg-green/80 transition-colors"
+                  className="w-12 h-12 rounded-full bg-green flex items-center justify-center hover:bg-green/80 hover:scale-110 active:scale-95 transition-all duration-200"
                 >
                   <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -279,7 +295,7 @@ export default function Home() {
                 </button>
                 <button
                   onClick={nextTestimonial}
-                  className="w-12 h-12 rounded-full bg-brown flex items-center justify-center hover:bg-brown/80 transition-colors"
+                  className="w-12 h-12 rounded-full bg-brown flex items-center justify-center hover:bg-brown/80 hover:scale-110 active:scale-95 transition-all duration-200"
                 >
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -320,7 +336,12 @@ export default function Home() {
 
       {/* Call to Action Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div
+          ref={ctaSection.ref}
+          className={`max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-all duration-700 ${
+            ctaSection.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brown mb-6">
             Rooted in Kaffa. Crafted for the World.
           </h2>
@@ -329,7 +350,7 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button className="hover:bg-green/40 text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 transition-all duration-300 group" style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}>
+            <Button className="hover:bg-green/40 hover:scale-[1.02] active:scale-[0.98] text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 transition-all duration-300 group" style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}>
               Order a sample
               <div className="w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:rotate-45" style={{ backgroundColor: '#331E0B' }}>
                 <svg
@@ -346,7 +367,7 @@ export default function Home() {
               </div>
             </Button>
 
-            <Button className="hover:bg-green/40 text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 transition-all duration-300 group" style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}>
+            <Button className="hover:bg-green/40 hover:scale-[1.02] active:scale-[0.98] text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 transition-all duration-300 group" style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}>
               Explore Our Coffee
               <div className="w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:rotate-45" style={{ backgroundColor: '#331E0B' }}>
                 <svg

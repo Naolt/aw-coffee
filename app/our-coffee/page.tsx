@@ -19,12 +19,12 @@ export default function OurCoffeePage() {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Natural Card */}
             <div className="flex flex-col">
-              <div className="relative w-full aspect-square overflow-hidden mb-6" style={{ borderRadius: '30px' }}>
+              <div className="relative w-full aspect-square overflow-hidden group cursor-pointer mb-6" style={{ borderRadius: '30px' }}>
                 <Image
-                  src="/home/hero.jpg"
+                  src="/our-farm/natural.webp"
                   alt="Natural Process Coffee"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
               <h3 className="text-2xl md:text-3xl font-semibold text-brown mb-3">
@@ -37,12 +37,12 @@ export default function OurCoffeePage() {
 
             {/* Washed Card */}
             <div className="flex flex-col">
-              <div className="relative w-full aspect-square overflow-hidden mb-6" style={{ borderRadius: '30px' }}>
+              <div className="relative w-full aspect-square overflow-hidden group cursor-pointer mb-6" style={{ borderRadius: '30px' }}>
                 <Image
-                  src="/home/hero.jpg"
+                  src="/our-farm/washed.jpg"
                   alt="Washed Process Coffee"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
               <h3 className="text-2xl md:text-3xl font-semibold text-brown mb-3">
@@ -55,12 +55,12 @@ export default function OurCoffeePage() {
 
             {/* Anaerobic Card */}
             <div className="flex flex-col">
-              <div className="relative w-full aspect-square overflow-hidden mb-6" style={{ borderRadius: '30px' }}>
+              <div className="relative w-full aspect-square overflow-hidden group cursor-pointer mb-6" style={{ borderRadius: '30px' }}>
                 <Image
-                  src="/home/hero.jpg"
+                  src="/our-farm/anaerobic.webp"
                   alt="Anaerobic Process Coffee"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
               </div>
               <h3 className="text-2xl md:text-3xl font-semibold text-brown mb-3">
@@ -86,12 +86,12 @@ export default function OurCoffeePage() {
 
           {/* Large Feature Image */}
           <div className="max-w-6xl mx-auto mb-12">
-            <div className="relative w-full aspect-[16/9] overflow-hidden" style={{ borderRadius: '30px' }}>
+            <div className="relative w-full aspect-[16/9] overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
               <Image
-                src="/home/hero.jpg"
+                src="/our-farm/farm.jpg"
                 alt="Tuga Farm"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
           </div>
@@ -99,8 +99,8 @@ export default function OurCoffeePage() {
           {/* Three Info Cards */}
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Tuga Farm Card */}
-            <div className="bg-white border border-brown/10 p-8" style={{ borderRadius: '30px' }}>
-              <div className="w-12 h-12 rounded-full bg-green/20 flex items-center justify-center mb-6">
+            <div className="bg-white border border-brown/10 p-8 transition-all duration-300 hover:shadow-lg hover:border-brown/20 hover:-translate-y-1" style={{ borderRadius: '30px' }}>
+              <div className="w-12 h-12 rounded-full bg-green/20 flex items-center justify-center mb-6 transition-transform duration-300 hover:scale-110">
                 <span className="text-2xl">🌱</span>
               </div>
               <h3 className="text-2xl font-semibold text-brown mb-4">Tuga Farm</h3>
@@ -116,8 +116,8 @@ export default function OurCoffeePage() {
             </div>
 
             {/* Our People Card */}
-            <div className="bg-white border border-brown/10 p-8" style={{ borderRadius: '30px' }}>
-              <div className="w-12 h-12 rounded-full bg-green/20 flex items-center justify-center mb-6">
+            <div className="bg-white border border-brown/10 p-8 transition-all duration-300 hover:shadow-lg hover:border-brown/20 hover:-translate-y-1" style={{ borderRadius: '30px' }}>
+              <div className="w-12 h-12 rounded-full bg-green/20 flex items-center justify-center mb-6 transition-transform duration-300 hover:scale-110">
                 <span className="text-2xl">👥</span>
               </div>
               <h3 className="text-2xl font-semibold text-brown mb-6">Our People</h3>
@@ -138,8 +138,8 @@ export default function OurCoffeePage() {
             </div>
 
             {/* Infrastructure Card */}
-            <div className="bg-white border border-brown/10 p-8" style={{ borderRadius: '30px' }}>
-              <div className="w-12 h-12 rounded-full bg-green/20 flex items-center justify-center mb-6">
+            <div className="bg-white border border-brown/10 p-8 transition-all duration-300 hover:shadow-lg hover:border-brown/20 hover:-translate-y-1" style={{ borderRadius: '30px' }}>
+              <div className="w-12 h-12 rounded-full bg-green/20 flex items-center justify-center mb-6 transition-transform duration-300 hover:scale-110">
                 <span className="text-2xl">🏭</span>
               </div>
               <h3 className="text-2xl font-semibold text-brown mb-6">Infrastructure</h3>

@@ -14,7 +14,7 @@ export function Footer() {
                 alt="AW Coffee"
                 width={300}
                 height={100}
-                className="h-24 w-auto"
+                className="h-48 w-auto"
               />
             </Link>
             <p className="text-brown/80 mb-6 leading-relaxed">

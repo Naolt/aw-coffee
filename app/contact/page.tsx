@@ -126,10 +126,11 @@ export default function ContactPage() {
 
                 <Button
                   type="submit"
-                  className="w-full hover:bg-green/40 text-brown rounded-full py-6 text-base font-semibold transition-all duration-300"
+                  className="w-full relative overflow-hidden hover:scale-[1.02] active:scale-[0.98] text-brown hover:text-white rounded-full py-6 text-base font-semibold transition-all duration-300 group"
                   style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}
                 >
-                  Send Message
+                  <span className="relative z-10">Send Message</span>
+                  <div className="absolute inset-0 bg-brown scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style={{ borderRadius: '9999px' }}></div>
                 </Button>
               </form>
             </div>
