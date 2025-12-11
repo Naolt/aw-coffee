@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { motion } from "motion/react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -45,7 +46,12 @@ export default function ContactPage() {
           {/* Two Column Layout */}
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
             {/* Left - Contact Form */}
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+            >
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <Label htmlFor="name" className="text-brown font-semibold mb-2 block">
@@ -133,10 +139,16 @@ export default function ContactPage() {
                   <div className="absolute inset-0 bg-brown scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style={{ borderRadius: '9999px' }}></div>
                 </Button>
               </form>
-            </div>
+            </motion.div>
 
             {/* Right - Contact Information */}
-            <div className="space-y-8">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-8"
+            >
               {/* Office Location */}
               <div>
                 <div className="flex items-start gap-4">
@@ -260,7 +272,7 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -268,7 +280,13 @@ export default function ContactPage() {
       {/* Map Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-6xl mx-auto"
+          >
             <div className="relative w-full h-[500px] overflow-hidden" style={{ borderRadius: '30px' }}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d252230.02153253514!2d38.61333034664393!3d8.963479604295102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85cef5ab402d%3A0x8467b6b037a24d49!2sAddis%20Ababa%2C%20Ethiopia!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
@@ -281,7 +299,7 @@ export default function ContactPage() {
                 title="AW Coffee Location"
               ></iframe>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </main>

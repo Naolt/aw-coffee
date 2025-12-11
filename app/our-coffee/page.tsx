@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "motion/react";
 
 export default function OurCoffeePage() {
   return (
@@ -18,7 +21,13 @@ export default function OurCoffeePage() {
           {/* Coffee Cards */}
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Natural Card */}
-            <div className="flex flex-col">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0 }}
+              className="flex flex-col"
+            >
               <div className="relative w-full aspect-square overflow-hidden group cursor-pointer mb-6" style={{ borderRadius: '30px' }}>
                 <Image
                   src="/our-farm/natural.webp"
@@ -33,10 +42,16 @@ export default function OurCoffeePage() {
               <p className="text-lg text-brown/80 font-light leading-relaxed">
                 Fruity, sweet, and intense aromas
               </p>
-            </div>
+            </motion.div>
 
             {/* Washed Card */}
-            <div className="flex flex-col">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="flex flex-col"
+            >
               <div className="relative w-full aspect-square overflow-hidden group cursor-pointer mb-6" style={{ borderRadius: '30px' }}>
                 <Image
                   src="/our-farm/washed.jpg"
@@ -51,10 +66,16 @@ export default function OurCoffeePage() {
               <p className="text-lg text-brown/80 font-light leading-relaxed">
                 Fruity, sweet, and aromatic, with pronounced body.
               </p>
-            </div>
+            </motion.div>
 
             {/* Anaerobic Card */}
-            <div className="flex flex-col">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-col"
+            >
               <div className="relative w-full aspect-square overflow-hidden group cursor-pointer mb-6" style={{ borderRadius: '30px' }}>
                 <Image
                   src="/our-farm/anaerobic.webp"
@@ -69,7 +90,7 @@ export default function OurCoffeePage() {
               <p className="text-lg text-brown/80 font-light leading-relaxed">
                 Lots designed for specialty roasters seeking distinctive flavor experiences.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -85,7 +106,13 @@ export default function OurCoffeePage() {
           </div>
 
           {/* Large Feature Image */}
-          <div className="max-w-6xl mx-auto mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-6xl mx-auto mb-12"
+          >
             <div className="relative w-full aspect-[16/9] overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
               <Image
                 src="/our-farm/farm.jpg"
@@ -94,12 +121,19 @@ export default function OurCoffeePage() {
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
-          </div>
+          </motion.div>
 
           {/* Three Info Cards */}
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Tuga Farm Card */}
-            <div className="bg-white border border-brown/10 p-8 transition-all duration-300 hover:shadow-lg hover:border-brown/20 hover:-translate-y-1" style={{ borderRadius: '30px' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0 }}
+              className="bg-white border border-brown/10 p-8 transition-all duration-300 hover:shadow-lg hover:border-brown/20 hover:-translate-y-1"
+              style={{ borderRadius: '30px' }}
+            >
               <div className="w-12 h-12 rounded-full bg-green/20 flex items-center justify-center mb-6 transition-transform duration-300 hover:scale-110">
                 <span className="text-2xl">🌱</span>
               </div>
@@ -113,10 +147,17 @@ export default function OurCoffeePage() {
                   Above 2,000m for dense beans and complex flavor.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Our People Card */}
-            <div className="bg-white border border-brown/10 p-8 transition-all duration-300 hover:shadow-lg hover:border-brown/20 hover:-translate-y-1" style={{ borderRadius: '30px' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-white border border-brown/10 p-8 transition-all duration-300 hover:shadow-lg hover:border-brown/20 hover:-translate-y-1"
+              style={{ borderRadius: '30px' }}
+            >
               <div className="w-12 h-12 rounded-full bg-green/20 flex items-center justify-center mb-6 transition-transform duration-300 hover:scale-110">
                 <span className="text-2xl">👥</span>
               </div>
@@ -135,10 +176,17 @@ export default function OurCoffeePage() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Infrastructure Card */}
-            <div className="bg-white border border-brown/10 p-8 transition-all duration-300 hover:shadow-lg hover:border-brown/20 hover:-translate-y-1" style={{ borderRadius: '30px' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white border border-brown/10 p-8 transition-all duration-300 hover:shadow-lg hover:border-brown/20 hover:-translate-y-1"
+              style={{ borderRadius: '30px' }}
+            >
               <div className="w-12 h-12 rounded-full bg-green/20 flex items-center justify-center mb-6 transition-transform duration-300 hover:scale-110">
                 <span className="text-2xl">🏭</span>
               </div>
@@ -157,7 +205,7 @@ export default function OurCoffeePage() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
