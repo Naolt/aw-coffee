@@ -2,35 +2,54 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import { client } from "@/sanity/lib/client";
+import { TESTIMONIALS_QUERY } from "@/sanity/lib/queries";
+import type { Testimonial } from "@/sanity/lib/types";
 
-const testimonials = [
+const fallbackTestimonials = [
   {
-    id: 1,
+    _id: "1",
     quote: "Working with AW Coffee was a pleasure. Their team was professional and our Delivery was on time.",
     author: "Michael Setiawan",
     role: "Founder Baku Hantam",
-    image: "/home/green.jpg"
+    imageUrl: "/home/green.jpg"
   },
   {
-    id: 2,
+    _id: "2",
     quote: "The quality of coffee from AW is exceptional. Our customers love the authentic Ethiopian taste and we've seen great growth since partnering with them.",
     author: "Sarah Johnson",
     role: "CEO Coffee House NYC",
-    image: "/home/hero.jpg"
+    imageUrl: "/home/hero.jpg"
   },
   {
-    id: 3,
+    _id: "3",
     quote: "AW Coffee has been our trusted supplier for 3 years. Their commitment to sustainability and quality is unmatched in the industry.",
     author: "David Chen",
     role: "Director of Operations, Brew Masters",
-    image: "/home/hero.jpg"
+    imageUrl: "/home/hero.jpg"
   }
 ];
 
 export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(fallbackTestimonials);
+
+  // Fetch testimonials from Sanity
+  useEffect(() => {
+    async function fetchTestimonials() {
+      try {
+        const data = await client.fetch<Testimonial[]>(TESTIMONIALS_QUERY);
+        if (data && data.length > 0) {
+          setTestimonials(data);
+        }
+      } catch (error) {
+        console.error('Error fetching testimonials:', error);
+      }
+    }
+    fetchTestimonials();
+  }, []);
 
   const nextTestimonial = () => {
     setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
@@ -277,7 +296,7 @@ export default function Home() {
             {/* Left - Square Image */}
             <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
               <Image
-                src={testimonials[currentTestimonial].image}
+                src={testimonials[currentTestimonial].imageUrl}
                 alt={testimonials[currentTestimonial].author}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -320,7 +339,7 @@ export default function Home() {
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-brown overflow-hidden">
                   <Image
-                    src={testimonials[currentTestimonial].image}
+                    src={testimonials[currentTestimonial].imageUrl}
                     alt={testimonials[currentTestimonial].author}
                     width={48}
                     height={48}
@@ -329,7 +348,10 @@ export default function Home() {
                 </div>
                 <div>
                   <div className="text-lg font-semibold text-brown">{testimonials[currentTestimonial].author}</div>
-                  <div className="text-sm text-brown font-light">{testimonials[currentTestimonial].role}</div>
+                  <div className="text-sm text-brown font-light">
+                    {testimonials[currentTestimonial].role}
+                    {testimonials[currentTestimonial].company && `, ${testimonials[currentTestimonial].company}`}
+                  </div>
                 </div>
               </div>
             </div>

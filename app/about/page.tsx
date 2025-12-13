@@ -4,8 +4,26 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import WorldMap from "@/components/ui/world-map";
 import { motion } from "motion/react";
+import { useState, useEffect } from "react";
+import { client } from "@/sanity/lib/client";
+import { TEAM_MEMBERS_QUERY } from "@/sanity/lib/queries";
+import type { TeamMember } from "@/sanity/lib/types";
 
 export default function AboutPage() {
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+
+  // Fetch team members from Sanity
+  useEffect(() => {
+    async function fetchTeamMembers() {
+      try {
+        const data = await client.fetch<TeamMember[]>(TEAM_MEMBERS_QUERY);
+        setTeamMembers(data);
+      } catch (error) {
+        console.error('Error fetching team members:', error);
+      }
+    }
+    fetchTeamMembers();
+  }, []);
 
   return (
     <main className="min-h-screen pt-20">
@@ -155,25 +173,58 @@ export default function AboutPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-brown mb-12">Our Team</h2>
 
             <div className="space-y-12">
-              {/* Team Member 1 */}
-              <div>
-                <h3 className="text-2xl md:text-3xl font-semibold text-brown mb-2">
-                  Asmamaw Woldemariam — CEO & General Manager
-                </h3>
-                <p className="text-lg md:text-xl text-brown/80 font-light leading-relaxed">
-                  Leads AW Coffee with vision, passion, and deep commitment to Kaffa's coffee legacy.
-                </p>
-              </div>
+              {teamMembers && teamMembers.length > 0 ? (
+                teamMembers.map((member) => (
+                  <motion.div
+                    key={member._id}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.6 }}
+                    className="flex flex-col md:flex-row gap-6 items-start"
+                  >
+                    {member.photoUrl && (
+                      <div className="relative w-32 h-32 flex-shrink-0 overflow-hidden rounded-full">
+                        <Image
+                          src={member.photoUrl}
+                          alt={member.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="flex-1">
+                      <h3 className="text-2xl md:text-3xl font-semibold text-brown mb-2">
+                        {member.name} — {member.role}
+                      </h3>
+                      <p className="text-lg md:text-xl text-brown/80 font-light leading-relaxed">
+                        {member.bio}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))
+              ) : (
+                // Fallback content
+                <>
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-semibold text-brown mb-2">
+                      Asmamaw Woldemariam — CEO & General Manager
+                    </h3>
+                    <p className="text-lg md:text-xl text-brown/80 font-light leading-relaxed">
+                      Leads AW Coffee with vision, passion, and deep commitment to Kaffa's coffee legacy.
+                    </p>
+                  </div>
 
-              {/* Team Member 2 */}
-              <div>
-                <h3 className="text-2xl md:text-3xl font-semibold text-brown mb-2">
-                  Abel Asmamaw — Export Manager
-                </h3>
-                <p className="text-lg md:text-xl text-brown/80 font-light leading-relaxed">
-                  Ensures smooth global operations, quality export standards, and strong partner relationships.
-                </p>
-              </div>
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-semibold text-brown mb-2">
+                      Abel Asmamaw — Export Manager
+                    </h3>
+                    <p className="text-lg md:text-xl text-brown/80 font-light leading-relaxed">
+                      Ensures smooth global operations, quality export standards, and strong partner relationships.
+                    </p>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -79,6 +79,12 @@ export const contactInfoType = defineType({
         },
       ],
     }),
+    defineField({
+      name: 'mapEmbedUrl',
+      title: 'Google Maps Embed URL',
+      type: 'url',
+      description: 'Go to Google Maps > Share > Embed a map > Copy the src URL from the iframe code',
+    }),
   ],
   preview: {
     select: {

@@ -1,3 +1,10 @@
+# Contact Page Update Instructions
+
+## Step 1: Update the imports at the top of `/app/contact/page.tsx`
+
+Replace lines 1-7 with:
+
+```typescript
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -9,7 +16,13 @@ import { motion } from "motion/react";
 import { client } from "@/sanity/lib/client";
 import { CONTACT_INFO_QUERY } from "@/sanity/lib/queries";
 import type { ContactInfo } from "@/sanity/lib/types";
+```
 
+## Step 2: Update the component state (after line 9)
+
+Replace the `ContactPage` function start with:
+
+```typescript
 export default function ContactPage() {
   const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
   const [formData, setFormData] = useState({
@@ -32,140 +45,13 @@ export default function ContactPage() {
     }
     fetchContactInfo();
   }, []);
+```
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here (e.g., send to API)
-    console.log("Form submitted:", formData);
-  };
+## Step 3: Update the Office Location section (around line 152-169)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+Replace the hardcoded office location with:
 
-  return (
-    <main className="min-h-screen pt-20">
-      {/* Hero Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brown mb-6">
-              CONTACT US
-            </h1>
-            <p className="text-xl md:text-2xl text-brown font-light max-w-3xl mx-auto leading-relaxed">
-              Let's Start a Conversation About Quality Coffee
-            </p>
-          </div>
-
-          {/* Two Column Layout */}
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12">
-            {/* Left - Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6 }}
-            >
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <Label htmlFor="name" className="text-brown font-semibold mb-2 block">
-                    Name *
-                  </Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="border-brown/20 focus:border-green focus:ring-green"
-                    placeholder="Your full name"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="email" className="text-brown font-semibold mb-2 block">
-                    Email *
-                  </Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="border-brown/20 focus:border-green focus:ring-green"
-                    placeholder="your.email@company.com"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="company" className="text-brown font-semibold mb-2 block">
-                    Company Name
-                  </Label>
-                  <Input
-                    id="company"
-                    name="company"
-                    type="text"
-                    value={formData.company}
-                    onChange={handleChange}
-                    className="border-brown/20 focus:border-green focus:ring-green"
-                    placeholder="Your company"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="phone" className="text-brown font-semibold mb-2 block">
-                    Phone Number
-                  </Label>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="border-brown/20 focus:border-green focus:ring-green"
-                    placeholder="+1 (555) 000-0000"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="message" className="text-brown font-semibold mb-2 block">
-                    Message *
-                  </Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    required
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="border-brown/20 focus:border-green focus:ring-green min-h-[150px]"
-                    placeholder="Tell us about your coffee needs..."
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  className="w-full relative overflow-hidden hover:scale-[1.02] active:scale-[0.98] text-brown hover:text-white rounded-full py-6 text-base font-semibold transition-all duration-300 group"
-                  style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}
-                >
-                  <span className="relative z-10">Send Message</span>
-                  <div className="absolute inset-0 bg-brown scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style={{ borderRadius: '9999px' }}></div>
-                </Button>
-              </form>
-            </motion.div>
-
-            {/* Right - Contact Information */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6 }}
-              className="space-y-8"
-            >
+```typescript
               {/* Office Location */}
               <div>
                 <div className="flex items-start gap-4">
@@ -183,7 +69,13 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
+```
 
+## Step 4: Update the Email section (around line 171-189)
+
+Replace with:
+
+```typescript
               {/* Email */}
               <div>
                 <div className="flex items-start gap-4">
@@ -203,7 +95,13 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
+```
 
+## Step 5: Update the Phone section (around line 191-209)
+
+Replace with:
+
+```typescript
               {/* Phone */}
               <div>
                 <div className="flex items-start gap-4">
@@ -223,7 +121,13 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
+```
 
+## Step 6: Update the Business Hours section (around line 211-225)
+
+Replace with:
+
+```typescript
               {/* Business Hours */}
               <div>
                 <div className="flex items-start gap-4">
@@ -252,7 +156,13 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
+```
 
+## Step 7: Update the Social Media section (around line 218-262)
+
+Replace with:
+
+```typescript
               {/* Social Media */}
               <div>
                 <div className="flex items-start gap-4">
@@ -304,36 +214,15 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+```
 
-      {/* Map Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-6xl mx-auto"
-          >
-            <div className="relative w-full h-[500px] overflow-hidden" style={{ borderRadius: '30px' }}>
-              <iframe
-                src={contactInfo?.mapEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d252230.02153253514!2d38.61333034664393!3d8.963479604295102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85cef5ab402d%3A0x8467b6b037a24d49!2sAddis%20Ababa%2C%20Ethiopia!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="AW Coffee Location"
-              ></iframe>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    </main>
-  );
-}
+---
+
+## Quick Summary:
+
+1. **Add imports** for Sanity client, queries, and types
+2. **Add useEffect** to fetch contact info on page load
+3. **Replace hardcoded values** with `contactInfo?.field || 'fallback'` pattern
+4. **Conditional social media** - only show icons if URLs exist in Sanity
+
+This way, the page works even if no data is in Sanity (shows fallback values), but updates automatically when you add contact info in the Studio!
