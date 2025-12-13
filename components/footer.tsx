@@ -1,7 +1,17 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function Footer() {
+  const pathname = usePathname();
+
+  // Hide footer on Sanity Studio route
+  if (pathname?.startsWith('/studio')) {
+    return null;
+  }
+
   return (
     <footer className="bg-white text-brown py-16 border-t border-brown/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

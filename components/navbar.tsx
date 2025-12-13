@@ -18,6 +18,11 @@ export function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Hide navbar on Sanity Studio route
+  if (pathname?.startsWith('/studio')) {
+    return null;
+  }
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-border/50" style={{
       background: 'linear-gradient(to right, rgba(255, 255, 255, 1) 46%, rgba(153, 153, 153, 1) 100%)'

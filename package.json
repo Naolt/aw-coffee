@@ -11,15 +11,21 @@
   "dependencies": {
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-slot": "^1.2.4",
+    "@sanity/image-url": "^2.0.2",
+    "@sanity/vision": "^4.21.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dotted-map": "^2.2.3",
+    "jsdom": "^27.3.0",
     "lucide-react": "^0.555.0",
     "motion": "^12.23.25",
     "next": "16.0.5",
+    "next-sanity": "^11.6.10",
     "next-themes": "^0.4.6",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "sanity": "^4.21.1",
+    "styled-components": "^6.1.19",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
