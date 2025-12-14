@@ -4,14 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { motion } from "motion/react";
 import { useSearchParams } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import { CONTACT_INFO_QUERY } from "@/sanity/lib/queries";
 import type { ContactInfo } from "@/sanity/lib/types";
 
-export default function ContactPage() {
+function ContactForm() {
   const searchParams = useSearchParams();
   const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
   const [formData, setFormData] = useState({
@@ -411,5 +411,23 @@ export default function ContactPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen pt-20">
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <p className="text-brown/60 font-light text-lg">Loading...</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    }>
+      <ContactForm />
+    </Suspense>
   );
 }
