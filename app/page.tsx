@@ -293,42 +293,44 @@ export default function Home() {
             transition={{ duration: 0.7 }}
             className="grid md:grid-cols-[1fr_2fr] gap-12 items-start"
           >
-            {/* Left - Square Image */}
+            {/* Left - Square Image (Static) */}
             <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
               <Image
-                src={testimonials[currentTestimonial].imageUrl}
-                alt={testimonials[currentTestimonial].author}
+                src="/home/green.jpg"
+                alt="AW Coffee Testimonials"
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
 
             {/* Right - Quote and Details */}
-            <div className="flex flex-col">
-              {/* Navigation Arrows - Top Right */}
-              <div className="flex gap-4 justify-end mb-8">
-                <button
-                  onClick={prevTestimonial}
-                  className="w-12 h-12 rounded-full bg-green flex items-center justify-center hover:bg-green/80 hover:scale-110 active:scale-95 transition-all duration-200"
-                >
-                  <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <button
-                  onClick={nextTestimonial}
-                  className="w-12 h-12 rounded-full bg-brown flex items-center justify-center hover:bg-brown/80 hover:scale-110 active:scale-95 transition-all duration-200"
-                >
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
+            <div className="flex flex-col h-full">
+              <div className="flex items-start justify-between gap-6 mb-6">
+                {/* Opening Quote */}
+                <svg className="w-16 h-16 flex-shrink-0" viewBox="0 0 24 24" fill="black">
+                  <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
+                </svg>
 
-              {/* Opening Quote */}
-              <svg className="w-16 h-16 mb-6" viewBox="0 0 24 24" fill="black">
-                <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
-              </svg>
+                {/* Navigation Arrows - Top Right */}
+                <div className="flex gap-4 flex-shrink-0">
+                  <button
+                    onClick={prevTestimonial}
+                    className="w-12 h-12 rounded-full bg-green flex items-center justify-center hover:bg-green/80 hover:scale-110 active:scale-95 transition-all duration-200"
+                  >
+                    <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={nextTestimonial}
+                    className="w-12 h-12 rounded-full bg-brown flex items-center justify-center hover:bg-brown/80 hover:scale-110 active:scale-95 transition-all duration-200"
+                  >
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
 
               {/* Testimonial Text */}
               <p className="text-2xl md:text-3xl text-brown font-light leading-relaxed mb-8">
@@ -336,7 +338,7 @@ export default function Home() {
               </p>
 
               {/* Author Info */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 mt-auto">
                 <div className="w-12 h-12 rounded-full bg-brown overflow-hidden">
                   <Image
                     src={testimonials[currentTestimonial].imageUrl}
