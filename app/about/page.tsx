@@ -11,6 +11,7 @@ import type { TeamMember } from "@/sanity/lib/types";
 
 export default function AboutPage() {
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Fetch team members from Sanity
   useEffect(() => {
@@ -63,18 +64,45 @@ export default function AboutPage() {
           <div className="max-w-5xl mx-auto">
             <div className="space-y-6 text-brown leading-relaxed font-light text-lg mb-8">
               <p>
-                In Kaffa, coffee isn't just a crop — it's our identity. Our founder, Asmamaw W/M, saw the world's growing demand for specialty coffee and believed Kaffa deserved a prominent place on the global stage. We planted our first forest coffee farm, Tuga Farm, in Bitta Woreda, Kaffa where the high-altitude forests naturally nurture rich, aromatic beans.
+                In Kaffa, the birthplace of coffee, it's more than a beverage — it's a way of life. Coffee runs through our culture, our land, and our history. From this fertile, high-altitude region where Arabica first took root, our story began — one of passion, perseverance, and pride.
               </p>
               <p>
-                From there, our journey evolved: 2013 – Start of our first farm in Kaffa Years of Organic Cultivation – Building expertise, quality, & strong farming systems Local Supply to ECX & Vertical Integration – Strengthening operations & quality control 2022 – Direct Export to US begins (a major milestone)
+                Our founder, Asmamaw W/M, envisioned sharing Kaffa's authentic flavor with the world. What started as a dream soon became reality when we planted our first forest coffee farm, Tuga Farm, in Bitta Woreda. Guided by generations of tradition and a commitment to sustainable, organic methods, we cultivated coffee that reflects both heritage and heart.
               </p>
               <p>
-                Today, AW Coffee works with its own farms and a network of trusted smallholder farmers who share our passion for quality and sustainability. Together, we are not just exporting coffee — we are sharing the true taste of Kaffa with the world.
+                Over the years, our journey has been defined by growth and resilience. We began by supplying coffee through ECX and vertical integration, gaining invaluable experience and trust. Through dedication and consistent quality, we reached a new milestone — exporting directly to the U.S. and European markets, bringing the true taste of Kaffa to global coffee lovers.
               </p>
+
+              {/* Expandable Content */}
+              <motion.div
+                initial={false}
+                animate={{
+                  height: isExpanded ? 'auto' : 0,
+                  opacity: isExpanded ? 1 : 0,
+                }}
+                transition={{
+                  duration: 0.5,
+                  ease: 'easeInOut',
+                }}
+                style={{ overflow: 'hidden' }}
+              >
+                <div className="space-y-6 pt-6">
+                  <p>
+                    Of course, no journey is without challenges. From securing fertile farms to building skilled teams, every step tested our resolve. But our unwavering belief in quality and our deep connection to the land carried us through.
+                  </p>
+                  <p>
+                    Today, we stand as a proud representation of Kaffa's legacy — combining tradition with innovation to produce coffee that is rich, authentic, and full of life. Every bean we harvest tells a story — of roots, resilience, and the timeless spirit of Kaffa.
+                  </p>
+                </div>
+              </motion.div>
             </div>
 
-            <Button className="hover:bg-green/40 hover:scale-[1.02] active:scale-[0.98] text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 transition-all duration-300 group" style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}>
-              Read More
+            <Button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="hover:bg-green/40 hover:scale-[1.02] active:scale-[0.98] text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 transition-all duration-300 group"
+              style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}
+            >
+              {isExpanded ? 'Show Less' : 'Read More'}
               <div className="w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:rotate-45" style={{ backgroundColor: '#331E0B' }}>
                 <svg
                   className="w-5 h-5 text-white"

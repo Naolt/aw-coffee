@@ -6,11 +6,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import { useSearchParams } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import { CONTACT_INFO_QUERY } from "@/sanity/lib/queries";
 import type { ContactInfo } from "@/sanity/lib/types";
 
 export default function ContactPage() {
+  const searchParams = useSearchParams();
   const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -19,6 +21,11 @@ export default function ContactPage() {
     phone: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
 
   // Fetch contact info from Sanity
   useEffect(() => {
@@ -33,10 +40,61 @@ export default function ContactPage() {
     fetchContactInfo();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Handle query parameters for pre-filling form
+  useEffect(() => {
+    const messageType = searchParams.get('message');
+    if (messageType === 'sample') {
+      setFormData(prev => ({
+        ...prev,
+        message: "I would like to request a coffee sample. Please provide information about available samples and the ordering process."
+      }));
+    }
+  }, [searchParams]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here (e.g., send to API)
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Thank you for your message! We will get back to you shortly.',
+        });
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          phone: "",
+          message: "",
+        });
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: data.error || 'Failed to send message. Please try again.',
+        });
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: 'An error occurred. Please try again later.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -147,12 +205,30 @@ export default function ContactPage() {
                   />
                 </div>
 
+                {/* Success/Error Message */}
+                {submitStatus.type && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`p-4 rounded-lg ${
+                      submitStatus.type === 'success'
+                        ? 'bg-green/10 text-green border border-green/20'
+                        : 'bg-red-50 text-red-600 border border-red-200'
+                    }`}
+                  >
+                    <p className="font-light">{submitStatus.message}</p>
+                  </motion.div>
+                )}
+
                 <Button
                   type="submit"
-                  className="w-full relative overflow-hidden hover:scale-[1.02] active:scale-[0.98] text-brown hover:text-white rounded-full py-6 text-base font-semibold transition-all duration-300 group"
+                  disabled={isSubmitting}
+                  className="w-full relative overflow-hidden hover:scale-[1.02] active:scale-[0.98] text-brown hover:text-white rounded-full py-6 text-base font-semibold transition-all duration-300 group disabled:opacity-50 disabled:cursor-not-allowed"
                   style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}
                 >
-                  <span className="relative z-10">Send Message</span>
+                  <span className="relative z-10">
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </span>
                   <div className="absolute inset-0 bg-brown scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" style={{ borderRadius: '9999px' }}></div>
                 </Button>
               </form>

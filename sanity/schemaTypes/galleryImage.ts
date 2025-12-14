@@ -6,13 +6,6 @@ export const galleryImageType = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      description: 'Internal title for organizing images',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
@@ -28,39 +21,26 @@ export const galleryImageType = defineType({
       description: 'Optional caption to display with the image',
     }),
     defineField({
-      name: 'category',
-      title: 'Category',
-      type: 'string',
-      options: {
-        list: [
-          { title: 'Farm', value: 'farm' },
-          { title: 'Processing', value: 'processing' },
-          { title: 'People', value: 'people' },
-          { title: 'Coffee', value: 'coffee' },
-          { title: 'Landscape', value: 'landscape' },
-        ],
-      },
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'featured',
-      title: 'Featured Image',
-      type: 'boolean',
-      description: 'Show this image prominently in the gallery',
-      initialValue: false,
-    }),
-    defineField({
-      name: 'uploadDate',
-      title: 'Upload Date',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
+      name: 'order',
+      title: 'Order',
+      type: 'number',
+      description: 'Order in which the image appears (lower numbers appear first)',
+      initialValue: 0,
     }),
   ],
   preview: {
     select: {
-      title: 'title',
-      subtitle: 'category',
+      caption: 'caption',
+      order: 'order',
       media: 'image',
+    },
+    prepare(selection) {
+      const { caption, order, media } = selection
+      return {
+        title: caption || 'Untitled Image',
+        subtitle: `Order: ${order}`,
+        media,
+      }
     },
   },
 })

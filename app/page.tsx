@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import { useRouter } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import { TESTIMONIALS_QUERY } from "@/sanity/lib/queries";
 import type { Testimonial } from "@/sanity/lib/types";
@@ -33,6 +34,7 @@ const fallbackTestimonials = [
 ];
 
 export default function Home() {
+  const router = useRouter();
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [testimonials, setTestimonials] = useState<Testimonial[]>(fallbackTestimonials);
 
@@ -131,7 +133,11 @@ export default function Home() {
                   of Kaffa to the world
                 </p>
               </div>
-              <Button className="mt-12 hover:bg-green/40 hover:scale-[1.02] active:scale-[0.98] text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 self-start transition-all duration-300 group" style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}>
+              <Button
+                onClick={() => router.push('/about')}
+                className="mt-12 hover:bg-green/40 hover:scale-[1.02] active:scale-[0.98] text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 self-start transition-all duration-300 group"
+                style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}
+              >
                 GET TO KNOW US MORE
                 <div className="w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:rotate-45" style={{ backgroundColor: '#331E0B' }}>
                   <svg
@@ -378,7 +384,11 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <Button className="hover:bg-green/40 hover:scale-[1.02] active:scale-[0.98] text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 transition-all duration-300 group" style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}>
+            <Button
+              onClick={() => router.push('/contact?message=sample')}
+              className="hover:bg-green/40 hover:scale-[1.02] active:scale-[0.98] text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 transition-all duration-300 group"
+              style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}
+            >
               Order a sample
               <div className="w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:rotate-45" style={{ backgroundColor: '#331E0B' }}>
                 <svg
@@ -395,7 +405,11 @@ export default function Home() {
               </div>
             </Button>
 
-            <Button className="hover:bg-green/40 hover:scale-[1.02] active:scale-[0.98] text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 transition-all duration-300 group" style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}>
+            <Button
+              onClick={() => router.push('/our-coffee')}
+              className="hover:bg-green/40 hover:scale-[1.02] active:scale-[0.98] text-brown rounded-full pl-6 pr-2 py-6 text-base flex items-center gap-3 transition-all duration-300 group"
+              style={{ backgroundColor: 'rgba(10, 212, 97, 0.2)' }}
+            >
               Explore Our Coffee
               <div className="w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:rotate-45" style={{ backgroundColor: '#331E0B' }}>
                 <svg

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
@@ -16,6 +16,7 @@ const navItems = [
 
 export function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Hide navbar on Sanity Studio route
@@ -55,7 +56,10 @@ export function Navbar() {
             ))}
           </div>
 
-          <Button className="hidden md:flex bg-green hover:bg-green/90 hover:scale-[1.05] active:scale-[0.98] text-black rounded-full px-6 transition-all duration-200">
+          <Button
+            onClick={() => router.push('/contact?message=sample')}
+            className="hidden md:flex bg-green hover:bg-green/90 hover:scale-[1.05] active:scale-[0.98] text-black rounded-full px-6 transition-all duration-200"
+          >
             Order Sample
           </Button>
 
@@ -103,7 +107,13 @@ export function Navbar() {
                 {item.name}
               </Link>
             ))}
-            <Button className="bg-green hover:bg-green/90 hover:scale-[1.02] active:scale-[0.98] text-black rounded-full px-4 py-3 mt-2 transition-all duration-200">
+            <Button
+              onClick={() => {
+                router.push('/contact?message=sample');
+                setMobileMenuOpen(false);
+              }}
+              className="bg-green hover:bg-green/90 hover:scale-[1.02] active:scale-[0.98] text-black rounded-full px-4 py-3 mt-2 transition-all duration-200"
+            >
               Order Sample
             </Button>
           </div>

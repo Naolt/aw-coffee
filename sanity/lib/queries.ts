@@ -19,17 +19,18 @@ export const CONTACT_INFO_QUERY = groq`*[_type == "contactInfo"][0]{
   mapEmbedUrl
 }`
 
-// Gallery Images Query
-export const GALLERY_IMAGES_QUERY = groq`*[_type == "galleryImage"] | order(uploadDate desc){
+// Gallery Images Query with Pagination
+// Usage: GALLERY_IMAGES_QUERY.replace('$start', start).replace('$end', end)
+export const GALLERY_IMAGES_QUERY = groq`*[_type == "galleryImage"] | order(order asc) [$start...$end]{
   _id,
-  title,
   caption,
-  category,
-  featured,
-  uploadDate,
+  order,
   "imageUrl": image.asset->url,
   "imageLqip": image.asset->metadata.lqip
 }`
+
+// Get total count of gallery images
+export const GALLERY_COUNT_QUERY = groq`count(*[_type == "galleryImage"])`
 
 // Testimonials Query
 export const TESTIMONIALS_QUERY = groq`*[_type == "testimonial" && active == true] | order(order asc){

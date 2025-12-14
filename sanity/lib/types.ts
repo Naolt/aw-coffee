@@ -18,11 +18,8 @@ export interface ContactInfo {
 
 export interface GalleryImage {
   _id: string
-  title: string
   caption?: string
-  category: 'farm' | 'processing' | 'people' | 'coffee' | 'landscape'
-  featured: boolean
-  uploadDate: string
+  order: number
   imageUrl: string
   imageLqip?: string
 }
