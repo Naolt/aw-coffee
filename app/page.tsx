@@ -64,7 +64,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen w-full bg-black">
+      <section className="relative h-screen min-h-[600px] w-full bg-black">
         <Image
           src="/home/hero.jpg"
           alt="AW Coffee Hero"
@@ -75,7 +75,7 @@ export default function Home() {
 
         {/* Overlay Content */}
         <div className="absolute inset-0">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center pt-20">
             {/* Left Aligned Text */}
             <div className="text-white max-w-3xl">
               <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6">AW Coffee</h1>
