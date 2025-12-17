@@ -9,34 +9,10 @@ import { client } from "@/sanity/lib/client";
 import { TESTIMONIALS_QUERY } from "@/sanity/lib/queries";
 import type { Testimonial } from "@/sanity/lib/types";
 
-const fallbackTestimonials = [
-  {
-    _id: "1",
-    quote: "Working with AW Coffee was a pleasure. Their team was professional and our Delivery was on time.",
-    author: "Michael Setiawan",
-    role: "Founder Baku Hantam",
-    imageUrl: "/home/green.jpg"
-  },
-  {
-    _id: "2",
-    quote: "The quality of coffee from AW is exceptional. Our customers love the authentic Ethiopian taste and we've seen great growth since partnering with them.",
-    author: "Sarah Johnson",
-    role: "CEO Coffee House NYC",
-    imageUrl: "/home/hero.jpg"
-  },
-  {
-    _id: "3",
-    quote: "AW Coffee has been our trusted supplier for 3 years. Their commitment to sustainability and quality is unmatched in the industry.",
-    author: "David Chen",
-    role: "Director of Operations, Brew Masters",
-    imageUrl: "/home/hero.jpg"
-  }
-];
-
 export default function Home() {
   const router = useRouter();
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>(fallbackTestimonials);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
   // Fetch testimonials from Sanity
   useEffect(() => {
@@ -285,87 +261,89 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-brown mb-12 uppercase">
-            What our users say
-          </h2>
+      {/* Testimonials Section - Only show if there are testimonials */}
+      {testimonials.length > 0 && (
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-brown mb-12 uppercase">
+              What our users say
+            </h2>
 
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 0.7 }}
-            className="grid md:grid-cols-[1fr_2fr] gap-12 items-start"
-          >
-            {/* Left - Square Image (Static) */}
-            <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
-              <Image
-                src="/home/green.jpg"
-                alt="AW Coffee Testimonials"
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-            </div>
-
-            {/* Right - Quote and Details */}
-            <div className="flex flex-col h-full">
-              <div className="flex items-start justify-between gap-6 mb-6">
-                {/* Opening Quote */}
-                <svg className="w-16 h-16 flex-shrink-0" viewBox="0 0 24 24" fill="black">
-                  <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
-                </svg>
-
-                {/* Navigation Arrows - Top Right */}
-                <div className="flex gap-4 flex-shrink-0">
-                  <button
-                    onClick={prevTestimonial}
-                    className="w-12 h-12 rounded-full bg-green flex items-center justify-center hover:bg-green/80 hover:scale-110 active:scale-95 transition-all duration-200"
-                  >
-                    <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={nextTestimonial}
-                    className="w-12 h-12 rounded-full bg-brown flex items-center justify-center hover:bg-brown/80 hover:scale-110 active:scale-95 transition-all duration-200"
-                  >
-                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.7 }}
+              className="grid md:grid-cols-[1fr_2fr] gap-12 items-start"
+            >
+              {/* Left - Square Image (Static) */}
+              <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
+                <Image
+                  src="/home/green.jpg"
+                  alt="AW Coffee Testimonials"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
               </div>
 
-              {/* Testimonial Text */}
-              <p className="text-2xl md:text-3xl text-brown font-light leading-relaxed mb-8">
-                {testimonials[currentTestimonial].quote}
-              </p>
+              {/* Right - Quote and Details */}
+              <div className="flex flex-col h-full">
+                <div className="flex items-start justify-between gap-6 mb-6">
+                  {/* Opening Quote */}
+                  <svg className="w-16 h-16 flex-shrink-0" viewBox="0 0 24 24" fill="black">
+                    <path d="M6 17h3l2-4V7H5v6h3zm8 0h3l2-4V7h-6v6h3z" />
+                  </svg>
 
-              {/* Author Info */}
-              <div className="flex items-center gap-4 mt-auto">
-                <div className="w-12 h-12 rounded-full bg-brown overflow-hidden">
-                  <Image
-                    src={testimonials[currentTestimonial].imageUrl}
-                    alt={testimonials[currentTestimonial].author}
-                    width={48}
-                    height={48}
-                    className="object-cover"
-                  />
+                  {/* Navigation Arrows - Top Right */}
+                  <div className="flex gap-4 flex-shrink-0">
+                    <button
+                      onClick={prevTestimonial}
+                      className="w-12 h-12 rounded-full bg-green flex items-center justify-center hover:bg-green/80 hover:scale-110 active:scale-95 transition-all duration-200"
+                    >
+                      <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={nextTestimonial}
+                      className="w-12 h-12 rounded-full bg-brown flex items-center justify-center hover:bg-brown/80 hover:scale-110 active:scale-95 transition-all duration-200"
+                    >
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-lg font-semibold text-brown">{testimonials[currentTestimonial].author}</div>
-                  <div className="text-sm text-brown font-light">
-                    {testimonials[currentTestimonial].role}
-                    {testimonials[currentTestimonial].company && `, ${testimonials[currentTestimonial].company}`}
+
+                {/* Testimonial Text */}
+                <p className="text-2xl md:text-3xl text-brown font-light leading-relaxed mb-8">
+                  {testimonials[currentTestimonial].quote}
+                </p>
+
+                {/* Author Info */}
+                <div className="flex items-center gap-4 mt-auto">
+                  <div className="w-12 h-12 rounded-full bg-brown overflow-hidden">
+                    <Image
+                      src={testimonials[currentTestimonial].imageUrl}
+                      alt={testimonials[currentTestimonial].author}
+                      width={48}
+                      height={48}
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <div className="text-lg font-semibold text-brown">{testimonials[currentTestimonial].author}</div>
+                    <div className="text-sm text-brown font-light">
+                      {testimonials[currentTestimonial].role}
+                      {testimonials[currentTestimonial].company && `, ${testimonials[currentTestimonial].company}`}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
       {/* Call to Action Section */}
       <section className="py-20 bg-white">

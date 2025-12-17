@@ -8,65 +8,6 @@ import type { GalleryImage } from "@/sanity/lib/types";
 
 const IMAGES_PER_PAGE = 20;
 
-// Fallback gallery images
-const fallbackImages = [
-  {
-    _id: "1",
-    imageUrl: "/home/hero.jpg",
-    caption: "Tuga Farm landscape",
-    order: 0,
-    span: "md:col-span-2 md:row-span-2",
-  },
-  {
-    _id: "2",
-    imageUrl: "/home/hero.jpg",
-    caption: "Coffee processing",
-    order: 1,
-    span: "md:col-span-1 md:row-span-1",
-  },
-  {
-    _id: "3",
-    imageUrl: "/home/hero.jpg",
-    caption: "Drying beds",
-    order: 2,
-    span: "md:col-span-1 md:row-span-1",
-  },
-  {
-    _id: "4",
-    imageUrl: "/home/hero.jpg",
-    caption: "Fresh coffee cherries",
-    order: 3,
-    span: "md:col-span-1 md:row-span-2",
-  },
-  {
-    _id: "5",
-    imageUrl: "/home/hero.jpg",
-    caption: "Washing station",
-    order: 4,
-    span: "md:col-span-1 md:row-span-1",
-  },
-  {
-    _id: "6",
-    imageUrl: "/home/hero.jpg",
-    caption: "Quality control",
-    order: 5,
-    span: "md:col-span-2 md:row-span-1",
-  },
-  {
-    _id: "7",
-    imageUrl: "/home/hero.jpg",
-    caption: "Farm workers",
-    order: 6,
-    span: "md:col-span-1 md:row-span-1",
-  },
-  {
-    _id: "8",
-    imageUrl: "/home/hero.jpg",
-    caption: "Coffee beans drying",
-    order: 7,
-    span: "md:col-span-1 md:row-span-1",
-  },
-];
 
 // Function to generate masonry layout spans
 const getMasonrySpan = (index: number): string => {
@@ -108,12 +49,9 @@ export default function GalleryPage() {
         if (images && images.length > 0) {
           setDisplayedImages(images);
           setHasMore(images.length < count);
-        } else {
-          setDisplayedImages(fallbackImages);
         }
       } catch (error) {
         console.error('Error fetching gallery images:', error);
-        setDisplayedImages(fallbackImages);
       } finally {
         setLoading(false);
       }
@@ -162,33 +100,43 @@ export default function GalleryPage() {
             </p>
           </div>
 
-          {/* Masonry Grid Gallery */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[250px]">
-            {displayedImages.map((image, index) => (
-              <div
-                key={image._id}
-                className={`relative overflow-hidden group cursor-pointer ${getMasonrySpan(index)}`}
-                style={{ borderRadius: '30px' }}
-              >
-                <Image
-                  src={image.imageUrl}
-                  alt={image.caption || 'Gallery image'}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  placeholder={image.imageLqip ? 'blur' : 'empty'}
-                  blurDataURL={image.imageLqip}
-                />
-                {/* Hover Overlay with Caption */}
-                {image.caption && (
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-end p-6">
-                    <p className="text-white font-light opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                      {image.caption}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+          {/* Masonry Grid Gallery or Empty State */}
+          {displayedImages.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[250px]">
+              {displayedImages.map((image, index) => (
+                <div
+                  key={image._id}
+                  className={`relative overflow-hidden group cursor-pointer ${getMasonrySpan(index)}`}
+                  style={{ borderRadius: '30px' }}
+                >
+                  <Image
+                    src={image.imageUrl}
+                    alt={image.caption || 'Gallery image'}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    placeholder={image.imageLqip ? 'blur' : 'empty'}
+                    blurDataURL={image.imageLqip}
+                  />
+                  {/* Hover Overlay with Caption */}
+                  {image.caption && (
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-end p-6">
+                      <p className="text-white font-light opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                        {image.caption}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20">
+              <svg className="w-24 h-24 mx-auto mb-6 text-brown/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <h3 className="text-2xl font-semibold text-brown mb-2">No Images Yet</h3>
+              <p className="text-brown/60 font-light">Our gallery is currently empty. Check back soon for updates!</p>
+            </div>
+          )}
 
           {/* Load More Button */}
           {hasMore && (
