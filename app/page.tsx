@@ -64,7 +64,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen min-h-[600px] w-full bg-black">
+      <section className="relative h-screen min-h-[600px] md:min-h-[800px] w-full bg-black">
         <Image
           src="/home/hero.jpg"
           alt="AW Coffee Hero"
@@ -75,12 +75,12 @@ export default function Home() {
 
         {/* Overlay Content */}
         <div className="absolute inset-0">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center pt-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center pt-32 md:pt-40 pb-12">
             {/* Left Aligned Text */}
             <div className="text-white max-w-3xl">
               <h1 className="text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6">AW Coffee</h1>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-light mb-8 leading-tight">
-                Born in Kaffa,<br />Brewed for the World
+                The Heritage of Kaffa,<br />The True Taste of Origin.
               </h2>
               <p className="text-lg md:text-xl leading-relaxed font-light">
                 Premium, traceable, and sustainably grown coffee from Kaffa — the origin of Arabica,
@@ -275,7 +275,7 @@ export default function Home() {
             {/* Right - Small Square Image */}
             <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
               <Image
-                src="/home/map.jpg"
+                src="/home/kaffa.jpg"
                 alt="AW Coffee Vision"
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-110"

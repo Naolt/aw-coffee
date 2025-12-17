@@ -132,7 +132,7 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Resources</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/our-farm" className="text-brown/80 hover:text-green transition-colors">
+                <Link href="/our-coffee" className="text-brown/80 hover:text-green transition-colors">
                   Our Farm
                 </Link>
               </li>
@@ -142,7 +142,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/order-sample" className="text-brown/80 hover:text-green transition-colors">
+                <Link href="/contact?message=sample" className="text-brown/80 hover:text-green transition-colors">
                   Order a Sample
                 </Link>
               </li>
