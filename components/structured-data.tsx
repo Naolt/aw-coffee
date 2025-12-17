@@ -15,7 +15,9 @@ interface ContactInfo {
 
 async function getContactInfo(): Promise<ContactInfo | null> {
   try {
-    const data = await client.fetch(CONTACT_INFO_QUERY, {}, { cache: 'no-store' });
+    const data = await client.fetch(CONTACT_INFO_QUERY, {}, {
+      next: { revalidate: 3600 } // Cache for 1 hour
+    });
     return data;
   } catch (error) {
     console.error('Error fetching contact info:', error);
