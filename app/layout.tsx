@@ -3,6 +3,8 @@ import { Lexend } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { OrganizationStructuredData, WebsiteStructuredData } from "@/components/structured-data";
+import { GoogleAnalytics } from "@/components/analytics";
 
 const lexend = Lexend({
   variable: "--font-lexend",
@@ -73,6 +75,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <OrganizationStructuredData />
+        <WebsiteStructuredData />
+        <GoogleAnalytics />
+      </head>
       <body
         className={`${lexend.variable} font-sans antialiased`}
       >
