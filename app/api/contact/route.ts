@@ -18,8 +18,8 @@ export async function POST(request: NextRequest) {
 
     // Send email using Resend
     const emailData = await resend.emails.send({
-      from: 'AW Coffee Contact <onboarding@resend.dev>', // Replace with your verified domain
-      to: process.env.CONTACT_EMAIL || 'info@awcoffee.com',
+      from: 'AW Coffee Contact <contact@awcoffeeexport.com>',
+      to: process.env.CONTACT_EMAIL!,
       replyTo: email,
       subject: `New Contact Form Submission from ${name}`,
       html: `
