@@ -8,12 +8,7 @@ import { useRouter } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import { TESTIMONIALS_QUERY } from "@/sanity/lib/queries";
 import type { Testimonial } from "@/sanity/lib/types";
-import { UniqueFeatures } from "@/components/unique-features";
-import { CoffeeJourney } from "@/components/coffee-journey";
-import { PremiumShowcase } from "@/components/premium-showcase";
 import { ExpandableFeatures } from "@/components/expandable-features";
-import { ParallaxShowcase } from "@/components/parallax-showcase";
-import { SplitHero } from "@/components/split-hero";
 
 export default function Home() {
   const router = useRouter();
@@ -89,9 +84,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NEW: Split Hero Alternative - Modern Design */}
-      <SplitHero />
-
       {/* About Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -153,20 +145,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* What Makes Us Unique Section - Option 1: Icon Cards */}
-      <UniqueFeatures />
-
-      {/* Coffee Journey Timeline - Option 2: Interactive Timeline */}
-      <CoffeeJourney />
-
-      {/* Premium Showcase - Option 3: Split Hero with Stats */}
-      <PremiumShowcase />
-
-      {/* Expandable Features - Option 4: Accordion/Expandable Cards */}
+      {/* What Makes Us Unique Section - Accordion/Expandable Cards */}
       <ExpandableFeatures />
-
-      {/* Parallax Showcase - Option 5: Scroll-Based Layered Design */}
-      <ParallaxShowcase />
 
       {/* Our Vision Section */}
       <section className="py-20 bg-white">
