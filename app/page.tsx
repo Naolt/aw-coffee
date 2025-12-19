@@ -8,6 +8,12 @@ import { useRouter } from "next/navigation";
 import { client } from "@/sanity/lib/client";
 import { TESTIMONIALS_QUERY } from "@/sanity/lib/queries";
 import type { Testimonial } from "@/sanity/lib/types";
+import { UniqueFeatures } from "@/components/unique-features";
+import { CoffeeJourney } from "@/components/coffee-journey";
+import { PremiumShowcase } from "@/components/premium-showcase";
+import { ExpandableFeatures } from "@/components/expandable-features";
+import { ParallaxShowcase } from "@/components/parallax-showcase";
+import { SplitHero } from "@/components/split-hero";
 
 export default function Home() {
   const router = useRouter();
@@ -83,6 +89,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* NEW: Split Hero Alternative - Modern Design */}
+      <SplitHero />
+
       {/* About Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -144,89 +153,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* What Makes Us Unique Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.05 }}
-            transition={{ duration: 0.7 }}
-            className="grid md:grid-cols-[1.5fr_1fr] gap-12"
-          >
-            {/* Left Section - Text and Small Images */}
-            <div className="flex flex-col">
-              <h2 className="text-4xl md:text-5xl font-bold text-brown mb-12">
-                WHAT MAKES US UNIQUE
-              </h2>
+      {/* What Makes Us Unique Section - Option 1: Icon Cards */}
+      <UniqueFeatures />
 
-              <div className="space-y-8 mb-12">
-                <div className="flex items-baseline justify-between">
-                  <div className="text-5xl">
-                    <span className="font-normal text-brown">Origin - </span>
-                    <span className="font-light text-black">Guarantee</span>
-                  </div>
-                  <span className="text-4xl font-bold text-brown opacity-20 ml-4">01</span>
-                </div>
+      {/* Coffee Journey Timeline - Option 2: Interactive Timeline */}
+      <CoffeeJourney />
 
-                <div className="flex items-baseline justify-between">
-                  <div className="text-5xl">
-                    <span className="font-normal text-brown">Strict Quality - </span>
-                    <span className="font-light text-black">Control</span>
-                  </div>
-                  <span className="text-4xl font-bold text-brown opacity-20 ml-4">02</span>
-                </div>
+      {/* Premium Showcase - Option 3: Split Hero with Stats */}
+      <PremiumShowcase />
 
-                <div className="flex items-baseline justify-between">
-                  <div className="text-5xl">
-                    <span className="font-normal text-brown">Direct - </span>
-                    <span className="font-light text-black">Sourcing</span>
-                  </div>
-                  <span className="text-4xl font-bold text-brown opacity-20 ml-4">03</span>
-                </div>
+      {/* Expandable Features - Option 4: Accordion/Expandable Cards */}
+      <ExpandableFeatures />
 
-                <div className="flex items-baseline justify-between">
-                  <div className="text-5xl">
-                    <span className="font-normal text-brown">Unmatched - </span>
-                    <span className="font-light text-black">Quality</span>
-                  </div>
-                  <span className="text-4xl font-bold text-brown opacity-20 ml-4">04</span>
-                </div>
-              </div>
-
-              {/* Bottom - Two Small Square Images */}
-              <div className="grid grid-cols-2 gap-6">
-                <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
-                  <Image
-                    src="/home/unique1.jpg"
-                    alt="AW Coffee Feature 1"
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
-                <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
-                  <Image
-                    src="/home/unique2.jpg"
-                    alt="AW Coffee Feature 2"
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Right - Full Height Image */}
-            <div className="relative w-full overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
-              <Image
-                src="/home/unique3.jpg"
-                alt="AW Coffee Unique"
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Parallax Showcase - Option 5: Scroll-Based Layered Design */}
+      <ParallaxShowcase />
 
       {/* Our Vision Section */}
       <section className="py-20 bg-white">
@@ -279,7 +219,7 @@ export default function Home() {
               {/* Left - Square Image (Static) */}
               <div className="relative w-full aspect-square overflow-hidden group cursor-pointer" style={{ borderRadius: '30px' }}>
                 <Image
-                  src="/home/green.jpg"
+                  src="/home/red.webp"
                   alt="AW Coffee Testimonials"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
